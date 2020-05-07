@@ -11,7 +11,7 @@
 9. users will be able to comment to other peoples posts
 10. user can add friends if logged in 
 11. users can see facts abt aa na and alonon 
-12. users kind find meetings in there area
+12. users can find meetings in there area
 13. user can edit there profile 
 
 
@@ -23,6 +23,7 @@
 <img src="images/IMG_1037.JPG"/>
 <img src="images/IMG_1038.JPG"/>
 <img src="images/IMG_1039.JPG"/>
+<img src="images/IMG_1040.JPG"/>
 
 
 
