@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import LoginRegisterForm from './LoginRegisterForm'
 import ProfileContainer from './ProfileContainer'
+import Header from './Header'
 
 class App extends React.Component {
   constructor(){
@@ -9,7 +10,8 @@ class App extends React.Component {
     this.state = {
       loggedIn: false,
       loggedInUserEmail: '',
-      loggedInUserId: ''
+      loggedInUserId: '',
+      views: 'login'
     }
   }
 
@@ -55,24 +57,58 @@ class App extends React.Component {
             loggedIn: true,
             loggedInUserEmail: loginJson.data.email,
             loggedInUserId: loginJson.data.id,
-            views: "products"
+            views: "myProfile"
           })
         }
     }catch(err){
       console.log(err)  
     }
   }
+    logout = async () =>{
+    try{
+      const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
+      const logoutResponse = await fetch(url,{
+        credentials: 'include'
+      })
+      const logoutJson = await logoutResponse.json()
+      if(logoutResponse.status === 200){
+        this.setState({
+          loggedIn: false, 
+          loggedInUserEmail: '',
+          views: "login"
+        })
+
+      }
+    
+    }catch(err){
+      console.log(err)  
+    }
+  }
+  switchViews = (nameOfView) => {
+    this.setState({
+      views: nameOfView,
+    })
+    
+  }
 
   render(){
     return (
       <div className="App">
+      <Header
+      logout={this.logout}
+      loggedIn={this.state.loggedIn}
+      switchViews={this.switchViews}
+      />
       {
-      this.state.loggedIn
-      ?
+      this.state.views === "myProfile"
+      &&
       <ProfileContainer
       userId={this.state.loggedInUserId}
       />
-      :
+      }
+      {
+      this.state.views === "login"
+      &&
       <LoginRegisterForm
       register={this.register}
       login={this.login}

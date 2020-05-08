@@ -10,6 +10,7 @@ class ProfileContainer extends React.Component{
 			idOfProfileToEdit: -1,
 			profile: [],
 			userId: '',
+			userHasProfile: 0,
 		}
 	}
 	componentDidMount() {
@@ -37,6 +38,7 @@ class ProfileContainer extends React.Component{
 					addProfile:[...this.state.addProfile, createProfileJson]
 				})
 			}
+			this.getUsersProfile()
 			
 		
 		}catch(err){
@@ -84,9 +86,12 @@ class ProfileContainer extends React.Component{
 			})
 			const productsJson = await productsResponse.json()
 			console.log(productsJson.data);
-			this.setState({
-				profile: productsJson.data,
-			})
+			if(productsResponse.status === 200){
+				this.setState({
+					profile: productsJson.data,
+					userHasProfile: 1
+				})
+			}
 		}catch(err){
 			console.log(err)	
 		}
