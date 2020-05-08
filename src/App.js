@@ -28,10 +28,33 @@ class App extends React.Component {
             loggedInUserEmail: registerJson.data.email,
 
         })
-          console.log(this.state.loggedIn, this.state.loggedInUserEmail);
       }
       
     
+    }catch(err){
+      console.log(err)  
+    }
+  }
+    login = async(loginInfo) =>{
+    const url = process.env.REACT_APP_API_URL + "/api/v1/users/login" 
+    try{
+      const loginResponse = await fetch(url, {
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify(loginInfo),
+        headers:{
+          'content-type': 'application/json'
+        }
+      })
+        const loginJson = await loginResponse.json()
+        if(loginResponse.status === 200){
+          this.setState({
+            loggedIn: true,
+            loggedInUserEmail: loginJson.data.email,
+            loggedInUserId: loginJson.data.id,
+            views: "products"
+          })
+        }
     }catch(err){
       console.log(err)  
     }
@@ -42,6 +65,7 @@ class App extends React.Component {
       <div className="App">
       <LoginRegisterForm
       register={this.register}
+      login={this.login}
       />
       </div>
     );
