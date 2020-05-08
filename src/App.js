@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import LoginRegisterForm from './LoginRegisterForm'
+import ProfileContainer from './ProfileContainer'
 
 class App extends React.Component {
   constructor(){
@@ -63,10 +64,16 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
+      {
+      this.state.loggedIn
+      ?
+      <ProfileContainer/>
+      :
       <LoginRegisterForm
       register={this.register}
       login={this.login}
       />
+      }
       </div>
     );
 
