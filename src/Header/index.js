@@ -23,14 +23,24 @@ function Header(props){
 			My Profile
 			</Menu.Item>
 			}
+			
+			{
+			props.loggedIn
+			&&
+			<Menu.Item 
+			name="feed"
+			onClick={() => props.switchViews("feed")}>
+			Feed
+			</Menu.Item>
+			}
+			
 			{
 			props.loggedIn
 			&&	
 			<Menu.Item onClick={props.logout}> Logout</Menu.Item>
-
 			}
-			{
 
+			{
 			!props.loggedIn
 			&&	
 			<Menu.Item onClick={() => props.switchViews("login")}> login</Menu.Item>
