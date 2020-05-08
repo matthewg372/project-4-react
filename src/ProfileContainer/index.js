@@ -1,7 +1,7 @@
 import React from 'react'
 import NewProfileForm from './NewProfileForm'
 import UserProfile from './UserProfile'
-
+import EditProfileModal from './EditProfileModal'
 class ProfileContainer extends React.Component{
 	constructor(){
 		super()
@@ -43,6 +43,38 @@ class ProfileContainer extends React.Component{
 			console.log(err)	
 		}
 	}
+	editProfile = (editProfile) =>{
+		this.setState({
+			idOfProfileToEdit: editProfile
+		})
+	}
+	updateProfile =  async (profileToUpdate) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/profiles/' + this.state.idOfProfileToEdit
+		console.log(url);
+		try{
+			const updateProfileResponse = await fetch(url ,{
+				credentials: 'include',
+				method: 'PUT',
+				body: JSON.stringify(profileToUpdate),
+				headers:{
+					'content-type': 'application/json'
+				}
+			})
+			const updateProfileJson = await updateProfileResponse.json()
+			console.log(updateProfileJson);
+			if(updateProfileResponse.status === 200){
+				const profile = this.state.profile
+				const indexOfProfileBeingUpdated = profile.findIndex(profile => profile.id == this.state.idOfProfileToEdit)
+				profile[indexOfProfileBeingUpdated] = updateProfileJson.data
+				this.setState({
+					profile: profile,
+					idOfProfileToEdit: -1
+				})
+			}
+		}catch(err){
+			console.log(err)	
+		}
+	}
 	getUsersProfile = async () => {
 		try{
 			const url = process.env.REACT_APP_API_URL + '/api/v1/profiles/user/' + this.props.userId
@@ -59,13 +91,29 @@ class ProfileContainer extends React.Component{
 			console.log(err)	
 		}
 	}
+	closeModal = () =>{
+		this.setState({
+			idOfProfileToEdit: -1
+		})
+	}
 
 	render(){
-		console.log(this.state.profile);
 		return(
 			<div>
 			<NewProfileForm addProfile={this.addProfile}/>
-			<UserProfile profile={this.state.profile}/>
+			<UserProfile 
+			profile={this.state.profile}
+			editProfile={this.editProfile}
+			/>
+			{
+			this.state.idOfProfileToEdit !== -1
+			&&
+			<EditProfileModal
+			updateProfile={this.updateProfile}
+			editProfile={this.state.profile.find((profile) => profile.id === this.state.idOfProfileToEdit)}
+			closeModal={this.closeModal}
+			/>
+			}
 			</div>
 		)
 	}

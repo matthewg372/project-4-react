@@ -1,27 +1,29 @@
 import React from 'react'
-import { Card , Feed, Button} from 'semantic-ui-react'
+import { Container, Divider, Image, Button} from 'semantic-ui-react'
 
 function UserProfile(props){
 	const profile = props.profile.map(profile => {
 		return (
-			<Card  key={profile.id} >
+  <div key={profile.id}>
+    <Image src='images/no-profile-picture-icon-14.png' size='medium' circular />
+    <Container textAlign='justified'>
+      	<b>{profile.first_name} {profile.last_name}</b>
+      	<Divider />
+      	<p>
+      	Days Sober: {profile.days_sober}
+      	</p>
+      	Birthday: {profile.date_of_birth}
+      	<p>
+      	</p>
+      	<p>
+      	sponsor: {profile.sponsor}
+     	 </p>
+      	<Button onClick={() => props.editProfile(profile.id)}>
+		Edit 
+		</Button>
 
-				<Card.Content >
-					<Card.Header>first name: {profile.first_name}</Card.Header>
-						<Card.Description>last name: {profile.last_name}</Card.Description>
-						<Card.Content>
-		        			days sober: {profile.days_sober}
-		        			<br/>
-		        			date of birth: $ {profile.date_of_birth}
-		    			</Card.Content>
-						<Card.Content>
-		        			sponsor: {profile.sponsor}
-		    			</Card.Content>
-		    			<br/>
-		    			
-	    		</Card.Content>
-
-			</Card>
+    </Container>
+  </div>
 		)
 	})
 
