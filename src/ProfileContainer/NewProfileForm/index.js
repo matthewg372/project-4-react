@@ -6,14 +6,30 @@ class NewProductForm extends React.Component{
 		super()
 		this.state={
 			images: '',
-			firstName: '',
-			lastName: '',
-			daysSober: '',
-			dateOfBirth: '',
+			first_name: '',
+			last_name: '',
+			days_sober: '',
+			date_of_birth: '',
 			sponsor: false,
 		}
 	}
-
+	handleChange = (e) => {
+		const state =  this.state
+		state[e.target.name] = e.target.value
+		this.setState(state)
+	}
+	handleSubmit = (e) => {
+		e.preventDefault()
+		this.props.addProfile(this.state)
+		this.setState({
+			images: '',
+			first_name: '',
+			last_name: '',
+			days_sober: '',
+			date_of_birth: '',
+			sponsor: false,
+		})
+	}
 
 render(){
 		return(
@@ -26,7 +42,7 @@ render(){
       		</Header>
       		<Modal.Content >
 			<Form onSubmit={this.handleSubmit}>
-				<Label>iamges:</Label>
+				<Label>images:</Label>
 				<Form.Input
 					type='text'
 					name='images'
@@ -36,29 +52,29 @@ render(){
 				<Label>First Name:</Label>
 				<Form.Input
 					type='text'
-					name='firstName'
-					value={this.state.firstName}
+					name='first_name'
+					value={this.state.first_name}
 					onChange={this.handleChange}
 				/>
 				<Label>Last Name:</Label>
 				<Form.Input
 					type='text'
-					name='lastName'
-					value={this.state.lastName}
+					name='last_name'
+					value={this.state.last_name}
 					onChange={this.handleChange}
 				/>
 				<Label>Days Sober:</Label>
 				<Form.Input
-					type='text'
-					name='daysSober'
-					value={this.state.daysSober}
+					type='number'
+					name='days_sober'
+					value={this.state.days_sober}
 					onChange={this.handleChange}
 				/>
 				<Label>Date Of Birth:</Label>
 				<Form.Input
-					type='text'
-					name='dateOfBirth'
-					value={this.state.dateOfBirth}
+					type='number'
+					name='date_of_birth'
+					value={this.state.date_of_birth}
 					onChange={this.handleChange}
 				/>
 				<Label>sponsor:</Label>

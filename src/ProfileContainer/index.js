@@ -10,6 +10,7 @@ class ProfileContainer extends React.Component{
 		}
 	}
 	addProfile = async (profileToAdd) => {
+		console.log(profileToAdd);
 		try{
 			const url = process.env.REACT_APP_API_URL + '/api/v1/profiles/'
 			const createProfileResponse = await fetch(url,{
@@ -21,6 +22,7 @@ class ProfileContainer extends React.Component{
 				body: JSON.stringify(profileToAdd)
 			})
 			const createProfileJson = await createProfileResponse.json()
+			console.log(createProfileResponse);
 			if(createProfileResponse.status === 201){
 				this.setState({
 					profile:[...this.state.profile, createProfileJson]
@@ -35,7 +37,7 @@ class ProfileContainer extends React.Component{
 
 	render(){
 		return(
-			<NewProfileForm/>
+			<NewProfileForm addProfile={this.addProfile}/>
 		)
 	}
 }
