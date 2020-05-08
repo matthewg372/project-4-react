@@ -12,8 +12,8 @@ class App extends React.Component {
   }
   register = async(registerInfo) =>{
     const url = process.env.REACT_APP_API_URL + "/api/v1/users/register"
-    try{
-      const registerResponse = await fetch(url,{
+    try{ 
+      const registerResponse = await fetch(url, {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify(registerInfo),
@@ -21,14 +21,16 @@ class App extends React.Component {
           'content-type': 'application/json'
         }
       })
-      const registerJson = await registerResponse.json()
-      if(registerResponse.status === 201){
-        this.setState({
-          loggedIn: true,
-          loggedInUserEmail:registerJson.data.email,
+        const registerJson = await registerResponse.json()
+        if(registerResponse.status === 201){
+          this.setState({
+            loggedIn: true,
+            loggedInUserEmail: registerJson.data.email,
 
         })
+          console.log(this.state.loggedIn, this.state.loggedInUserEmail);
       }
+      
     
     }catch(err){
       console.log(err)  
@@ -38,7 +40,9 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-      <LoginRegisterForm/>
+      <LoginRegisterForm
+      register={this.register}
+      />
       </div>
     );
 
