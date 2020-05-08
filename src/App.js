@@ -8,9 +8,11 @@ class App extends React.Component {
     super()
     this.state = {
       loggedIn: false,
-      loggedInUserEmail: ''
+      loggedInUserEmail: '',
+      loggedInUserId: ''
     }
   }
+
   register = async(registerInfo) =>{
     const url = process.env.REACT_APP_API_URL + "/api/v1/users/register"
     try{ 
@@ -67,7 +69,9 @@ class App extends React.Component {
       {
       this.state.loggedIn
       ?
-      <ProfileContainer/>
+      <ProfileContainer
+      userId={this.state.loggedInUserId}
+      />
       :
       <LoginRegisterForm
       register={this.register}
