@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Label, Modal} from 'semantic-ui-react'
+import { Form, Button, Label, Modal, Comment} from 'semantic-ui-react'
 
 class NewCommentForm extends React.Component{
 	constructor(){
@@ -9,25 +9,32 @@ class NewCommentForm extends React.Component{
 
 		}
 	}
+	handleChange = (e) => {
+		const state =  this.state
+		state[e.target.name] = e.target.value
+		this.setState(state)
+	}
+	handleSubmit = (e) => {
+		e.preventDefault()
+		this.props.addComment(this.state)
+		this.setState({
+			bio: '',
+		})
+	}
+
 	render(){
 		return(
 			<React.Fragment>
-			<Modal 
-			closeIcon={true} 
-			trigger={<Button className="button">Add Comment</Button>}>
-      		<Modal.Content >
-			<Form onSubmit={this.handleSubmit}>
+			<Form reply onSubmit={this.handleSubmit}>
 				<Label>Comment:</Label>
-				<Form.Input
+      			<Form.TextArea
 					type='text'
 					name='bio'
 					value={this.state.bio}
 					onChange={this.handleChange}
-				/>
-				<Button type='Submit'>Add</Button>
-			</Form>
-			</Modal.Content>
-			</Modal>
+      			/>
+      			<Button type='Submit' content='Add Reply' labelPosition='left' icon='edit' primary />
+    		</Form>
 
 
 			</React.Fragment>
