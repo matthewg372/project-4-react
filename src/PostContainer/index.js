@@ -7,10 +7,13 @@ class PostContainer extends React.Component{
 		super(props)
 		this.state = {
 			posts: [],
+			idOfPostToEdit: -1,
+			userId: ''
 
 		}
 	}
 	componentDidMount(){
+
 	}
 	addPost = async (postToAdd) => {
 		try{
@@ -41,6 +44,23 @@ class PostContainer extends React.Component{
 
 		})
 	}
+	// deleteProduct = async (productToDelete) =>{
+	// 	try{
+	// 		const url = process.env.REACT_APP_API_URL + '/api/v1/products/'
+	// 		const deleteProductResponse = await fetch(url + productToDelete,{
+	// 			credentials: 'include',
+	// 			method: 'DELETE'
+	// 		})
+	// 		const deletedProductJson = await deleteProductResponse.json()
+	// 		if(deleteProductResponse.status === 200){
+	// 			this.setState({
+	// 				products: this.state.products.filter(product => product.id != productToDelete)
+	// 			})
+	// 		}
+	// 	}catch(err){
+	// 		console.log(err)	
+	// 	}
+	// }
 	render(){
 		return (
 			<React.Fragment>
@@ -49,6 +69,7 @@ class PostContainer extends React.Component{
 				&&
 				<NewPostForm
 				addPost={this.addPost}
+				getPosts={this.props.getPosts}
 				/>
 				}
 			</React.Fragment>

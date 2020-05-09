@@ -119,6 +119,7 @@ class App extends React.Component {
       this.state.views === "feed"
       &&
       <Feed
+      userId={this.state.loggedInUserId}
       loggedIn={this.state.loggedIn}
       />
       }

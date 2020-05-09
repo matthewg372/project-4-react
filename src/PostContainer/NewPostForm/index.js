@@ -16,20 +16,33 @@ class NewPostForm extends React.Component{
 			bio: '',
 		}
 	}
+	handleChange = (e) => {
+		const state =  this.state
+		state[e.target.name] = e.target.value
+		this.setState(state)
+	}
+	handleSubmit = (e) => {
+		e.preventDefault()
+		this.props.addPost(this.state)
+		this.setState({
+			bio: '',
+		})
+		this.props.getPosts()
+	}
 	render(){
 		return(
 			<React.Fragment >
 			<Form onSubmit={this.handleSubmit} style={form}>
-				<Label>Comment:</Label>
+				<Label>Post:</Label>
 				<Form.Input
 				type="text"
-				name="Comment"
-				placeholder="enter Comment"
-				value={this.state.username}
+				name="bio"
+				placeholder="enter Post"
+				value={this.state.bio}
 				onChange={this.handleChange}
 				/>
 				<Button type="submit">
-				Add Comment
+				Add Post
 				</Button>
 			</Form>
 
