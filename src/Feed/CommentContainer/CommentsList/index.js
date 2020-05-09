@@ -1,12 +1,17 @@
 import React from 'react'
-import { Comment , Header, Button, Form} from 'semantic-ui-react'
+import { Comment , Header, Button, Form, Dropdown} from 'semantic-ui-react'
 
 
 function CommentsList(props){
 
 	const comments = props.comments.map(comment => {
 		return (
-			<Comment.Group>
+			<Comment.Group key={comment.id}>
+				<Dropdown text='Edit/Delete'>
+				    <Dropdown.Menu>
+				    <Dropdown.Item text='Edit' onClick={() => props.editComment(comment.id)} />
+				    </Dropdown.Menu>
+			 	</Dropdown>
 			<Comment>
 			  <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
 			  <Comment.Content>

@@ -1,13 +1,15 @@
 import React from 'react'
 import NewCommentForm from './NewCommentForm'
 import CommentsList from './CommentsList'
+import EditCommentModal from './EditCommentModal'
 import { Header} from 'semantic-ui-react'
 
 class CommentContainer extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			comments: []
+			comments: [],
+			idOfCommentToEdit: -1
 
 		}
 	}
@@ -49,21 +51,37 @@ class CommentContainer extends React.Component{
 		}catch(err){
 			console.log(err)	
 		}
-	}	
+	}
+	editComment = (editComment) => {
+		this.setState({
+			idOfCommentToEdit: editComment
+		})
+	}
+	closeModal = () =>{
+		this.setState({
+			idOfCommentToEdit: -1
+		})
+	}
 	render(){
-		console.log(this.props.postId);
 		return(
 			<div>
-				<Header as='h3' dividing>
-			  		Comments
-				</Header>
 				<NewCommentForm
 				addComment={this.addComment}
 				/>
+				<br/>
 				<CommentsList
 				addComment={this.addComment}
 				comments={this.state.comments}
+				editComment={this.editComment}
 				/>
+				{
+				this.state.idOfCommentToEdit !== -1
+				&&
+				<EditCommentModal
+				closeModal={this.closeModal}
+				editComment={this.state.comments.find((comment) => comment.id === this.state.idOfCommentToEdit)}
+				/>
+				}
 			</div>
 		)
 
