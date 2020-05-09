@@ -92,11 +92,16 @@ class Feed extends React.Component{
 				userId={this.props.userId}
 				getPosts={this.getPosts}
 				/>
+				{
+				this.props.loggedIn
+				&&
 				<UserPosts
 				deletePost={this.deletePost}
 				posts={this.state.posts}
 				editPost={this.editPost}
 				/>
+
+				}
 				{
 				this.state.idOfPostToEdit !== -1
 				&&					
