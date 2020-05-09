@@ -9,6 +9,7 @@ function CommentsList(props){
 			<Comment.Group key={comment.id}>
 				<Dropdown text='Edit/Delete'>
 				    <Dropdown.Menu>
+					<Dropdown.Item text='Delete' onClick={() => props.deleteComment(comment.id)} />
 				    <Dropdown.Item text='Edit' onClick={() => props.editComment(comment.id)} />
 				    </Dropdown.Menu>
 			 	</Dropdown>
@@ -27,15 +28,16 @@ function CommentsList(props){
 			</Comment>
 			</Comment.Group>
 
+
 		)
 	})
-	return (
-		<div className="segment">
-			<div>
-				{comments}
-			</div>
-		</div>
-	)
+
+  	return(
+  		<div>
+  		{comments}
+  		</div>
+
+  	)
 
 }
 export default CommentsList

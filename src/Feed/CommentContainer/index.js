@@ -2,14 +2,15 @@ import React from 'react'
 import NewCommentForm from './NewCommentForm'
 import CommentsList from './CommentsList'
 import EditCommentModal from './EditCommentModal'
-import { Header} from 'semantic-ui-react'
+import {  Checkbox,Header} from 'semantic-ui-react'
 
 class CommentContainer extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
 			comments: [],
-			idOfCommentToEdit: -1
+			idOfCommentToEdit: -1,
+			collapsed: true
 
 		}
 	}
@@ -57,27 +58,76 @@ class CommentContainer extends React.Component{
 			idOfCommentToEdit: editComment
 		})
 	}
+	updateComment =  async (commentToUpdate) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/comments/' + this.state.idOfCommentToEdit
+		try{
+			const updateCommentResponse = await fetch(url ,{
+				credentials: 'include',
+				method: 'PUT',
+				body: JSON.stringify(commentToUpdate),
+				headers:{
+					'content-type': 'application/json'
+				}
+			})
+			const updateCommentJson = await updateCommentResponse.json()
+			if(updateCommentResponse.status === 200){
+				const comments = this.state.comments
+				const indexOfCommentBeingUpdated = comments.findIndex(comment => comment.id == this.state.idOfCommentToEdit)
+				comments[indexOfCommentBeingUpdated] = updateCommentJson.data
+				this.setState({
+					comments: comments,
+					idOfCommentToEdit: -1
+				})
+			}
+			this.getComments()
+		}catch(err){
+			console.log(err)	
+		}
+	}
+	deleteComment = async (commentToDelete) =>{
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/comments/'
+			const deleteCommentResponse = await fetch(url + commentToDelete,{
+				credentials: 'include',
+				method: 'DELETE'
+			})
+			const deletedCommentJson = await deleteCommentResponse.json()
+			if(deleteCommentResponse.status === 200){
+				this.setState({
+					comments: this.state.comments.filter(comment => comment.id != commentToDelete)
+				})
+			}
+		}catch(err){
+			console.log(err)	
+		}
+	}
 	closeModal = () =>{
 		this.setState({
 			idOfCommentToEdit: -1
 		})
 	}
+
+  handleCheckbox = (e, { checked }) => this.setState({ collapsed: checked })
 	render(){
+		const { collapsed } = this.state
 		return(
 			<div>
 				<NewCommentForm
 				addComment={this.addComment}
 				/>
 				<br/>
+
 				<CommentsList
-				addComment={this.addComment}
 				comments={this.state.comments}
 				editComment={this.editComment}
+				deleteComment={this.deleteComment}
 				/>
+
 				{
 				this.state.idOfCommentToEdit !== -1
 				&&
 				<EditCommentModal
+				updateComment={this.updateComment}
 				closeModal={this.closeModal}
 				editComment={this.state.comments.find((comment) => comment.id === this.state.idOfCommentToEdit)}
 				/>
