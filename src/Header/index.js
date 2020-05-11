@@ -34,6 +34,13 @@ function Header(props){
 			</Menu.Item>
 			}
 			
+
+			{
+			props.loggedIn
+			&&
+			<Menu.Item onClick={() => props.switchViews("FindFriends")}>Find Friends</Menu.Item>
+			}
+			
 			{
 			props.loggedIn
 			&&	

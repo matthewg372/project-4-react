@@ -3,14 +3,14 @@ import CommentContainer from '../CommentContainer'
 import { Card , Feed, Button, Dropdown} from 'semantic-ui-react'
 
 const post = {
-	flex: "display",
-	justifyContent: "right"
+	paddingLeft: "40%",
+	paddingTop: "2%"
 }
 function PostsList(props){
 	const posts = props.posts.map(post => {
 		return (
 			<Card  key={post.id}>
-				<Dropdown text='settings' style={post}>
+				<Dropdown text='settings'>
 				    <Dropdown.Menu>
 				    <Dropdown.Item text='Delete' onClick={() => props.deletePost(post.id)} />
 				    <Dropdown.Item text='Edit' onClick={() => props.editPost(post.id)} />
@@ -35,7 +35,7 @@ function PostsList(props){
 		)
 	})
 	return (
-		<div className="segment">
+		<div className="segment" style={post} >
 			<div>
 				{posts}
 			</div>

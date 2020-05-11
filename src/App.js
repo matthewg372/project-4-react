@@ -1,9 +1,11 @@
 import React from 'react';
-import './App.css';
 import LoginRegisterForm from './LoginRegisterForm'
 import ProfileContainer from './ProfileContainer'
 import Feed from './Feed'
 import Header from './Header'
+import SideBar from './SideBar'
+import FriendshipContainer from './FriendshipContainer'
+import './App.css';
 
 class App extends React.Component {
   constructor(){
@@ -122,6 +124,11 @@ class App extends React.Component {
       userId={this.state.loggedInUserId}
       loggedIn={this.state.loggedIn}
       />
+      }
+      {
+      this.state.views === "FindFriends"
+      &&
+      <FriendshipContainer/>
       }
       </div>
     );

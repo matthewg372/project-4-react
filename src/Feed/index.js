@@ -1,7 +1,6 @@
 import React from 'react'
 import PostContainer from '../PostContainer'
-import UserPosts from './UserPosts'
-import UserEditPostModal from './UserEditPostModal'
+
 
 class Feed extends React.Component{
 	constructor(props){
@@ -14,6 +13,29 @@ class Feed extends React.Component{
 	}
 	componentDidMount() {
 		this.getPosts()
+	}
+	addPost = async (postToAdd) => {
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/posts/'
+			const createPostResponse = await fetch(url,{
+				credentials: 'include',
+				method: 'POST',
+				headers:{
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify(postToAdd)
+			})
+			const createPostJson = await createPostResponse.json()
+			if(createPostResponse.status === 200){
+				this.setState({
+					posts:[...this.state.posts, createPostJson]
+				})
+			}
+			
+		
+		}catch(err){
+			console.log(err)	
+		}
 	}
 	getPosts = async () => {
 		try{
@@ -92,25 +114,7 @@ class Feed extends React.Component{
 				userId={this.props.userId}
 				getPosts={this.getPosts}
 				/>
-				{
-				this.props.loggedIn
-				&&
-				<UserPosts
-				deletePost={this.deletePost}
-				posts={this.state.posts}
-				editPost={this.editPost}
-				/>
 
-				}
-				{
-				this.state.idOfPostToEdit !== -1
-				&&					
-				<UserEditPostModal
-				updatePost={this.updatePost}
-				editPost={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
-				closeModal={this.closeModal}
-				/>
-				}
 			</div>
 		)
 

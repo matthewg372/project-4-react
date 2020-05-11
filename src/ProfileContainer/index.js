@@ -2,7 +2,7 @@ import React from 'react'
 import NewProfileForm from './NewProfileForm'
 import UserProfile from './UserProfile'
 import EditProfileModal from './EditProfileModal'
-import UserPosts from '../Feed/UserPosts'
+import UserPosts from '../PostContainer/UserPosts'
 
 
 

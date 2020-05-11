@@ -1,7 +1,5 @@
 import React from 'react'
 import { Comment , Header, Button, Form, Dropdown} from 'semantic-ui-react'
-
-
 function CommentsList(props){
 
 	const comments = props.comments.map(comment => {
