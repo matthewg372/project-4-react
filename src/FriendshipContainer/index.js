@@ -5,7 +5,8 @@ class FriendshipContainer extends React.Component{
 	constructor(){
 		super()
 		this.state={
-			foundFriend: []
+			foundFriend: [],
+			friend: []
 		}
 	}
 	componentDidMount(){
@@ -18,7 +19,6 @@ class FriendshipContainer extends React.Component{
 				credentials: 'include'
 			})
 			const friendJson = await friendResponse.json()
-			console.log("-----", friendJson);
 			this.setState({
 				foundFriend: friendJson.data
 			})
@@ -27,10 +27,31 @@ class FriendshipContainer extends React.Component{
 		}
 		
 	}
+	addFriend = async (friendId) => {
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/friendships/' + friendId
+			const friendResponse = await fetch(url,{
+				credentials: 'include',
+				method: 'POST',
+				headers:{
+					'content-type': 'application/json'
+				}
+			})
+			const friendJson = await friendResponse.json()
+			this.setState({
+				friend: friendJson.data
+			})
+		}catch(err){
+			console.log(err)	
+		}
+	}
 	render(){
 		return(
 			<div>
-			<FriendList friends={this.state.foundFriend}/>
+			<FriendList 
+			friends={this.state.foundFriend}
+			addFriend={this.addFriend}
+			/>
 			</div>
 
 

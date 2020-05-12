@@ -114,7 +114,6 @@ class Feed extends React.Component{
 				userId={this.props.userId}
 				getPosts={this.getPosts}
 				/>
-
 			</div>
 		)
 

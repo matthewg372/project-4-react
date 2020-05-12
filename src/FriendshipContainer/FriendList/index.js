@@ -1,12 +1,20 @@
 import React from 'react'
-import {Card} from 'semantic-ui-react'
+import {Card, Button} from 'semantic-ui-react'
 
 function FriendList(props){
 	const friends = props.friends.map(friend =>{
+
 		return(
-			<Card.Content key={friend.id}>
-				<Card.Header>{friend.user.username}</Card.Header>
+			<Card key={friend.id}>
+			<Card.Content >
+				<Card.Header>Username: {friend.user.username}</Card.Header>
+				<Card.Description>Sponsor: </Card.Description>
+				<Card.Content>Days Sober: {friend.days_sober}</Card.Content>
 			</Card.Content>
+			<Button onClick={() => props.addFriend(friend.id)}> Add Friend</Button>
+
+			</Card>
+
 
 
 		)

@@ -13,7 +13,9 @@ function Header(props){
 		<div style={divStyle}>
 			<h1>AH</h1>
 		<Menu>
-
+			<Menu.Item name="meeting" onClick={() => props.switchViews("meetings")}>
+			Meetings
+			</Menu.Item>
 			{
 			props.loggedIn
 			&&	
@@ -40,7 +42,7 @@ function Header(props){
 			&&
 			<Menu.Item onClick={() => props.switchViews("FindFriends")}>Find Friends</Menu.Item>
 			}
-			
+
 			{
 			props.loggedIn
 			&&	

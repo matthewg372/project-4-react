@@ -11,11 +11,17 @@ class PostContainer extends React.Component{
 			posts: [],
 			idOfPostToEdit: -1,
 			getPosts: [],
+			friendsPosts: [],
+			found: false,
+			id: '',
+			friendPost: []
 
 		}
 	}
 	componentDidMount() {
 		this.getPosts()
+		this.getFriends()
+		this.getFriendsPosts()
 	}
 	addPost = async (postToAdd) => {
 		try{
@@ -111,6 +117,37 @@ class PostContainer extends React.Component{
 			idOfPostToEdit: -1
 		})
 	}
+	getFriends = async () => {
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/friendships/user/' + this.props.userId
+			const friendsPostsResponse = await fetch(url,{
+				credentials: 'include'
+			})
+			const friendsPostsJson = await friendsPostsResponse.json()
+			this.setState({
+				friendsPosts: friendsPostsJson.data
+			})
+			this.getFriendsPosts()
+		}catch(err){
+			console.log(err)	
+		}
+
+	}
+	getFriendsPosts = async () => {
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/posts/all/' + this.props.userId
+			const postsResponse = await fetch(url,{
+				credentials: 'include'
+			})
+			const postsJson = await postsResponse.json()
+			this.setState({
+				friendPost: postsJson.data,
+			})
+		}catch(err){
+			console.log(err)	
+		}
+
+	}
 	render(){
 		return (
 			<React.Fragment>
@@ -129,6 +166,7 @@ class PostContainer extends React.Component{
 				deletePost={this.deletePost}
 				posts={this.state.getPosts}
 				editPost={this.editPost}
+				friendsPosts={this.state.friendPost}
 				/>
 
 				}

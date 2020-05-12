@@ -5,6 +5,7 @@ import Feed from './Feed'
 import Header from './Header'
 import SideBar from './SideBar'
 import FriendshipContainer from './FriendshipContainer'
+import MeetingContainer from './MeetingContainer'
 import './App.css';
 
 class App extends React.Component {
@@ -129,6 +130,13 @@ class App extends React.Component {
       this.state.views === "FindFriends"
       &&
       <FriendshipContainer/>
+      }
+      {
+      this.state.views === "meetings"
+      &&
+      <MeetingContainer
+      loggedIn={this.state.loggedIn}
+      />
       }
       </div>
     );

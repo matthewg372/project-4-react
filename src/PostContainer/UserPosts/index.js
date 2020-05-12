@@ -4,9 +4,11 @@ import { Card , Feed, Button, Dropdown} from 'semantic-ui-react'
 
 const post = {
 	paddingLeft: "40%",
-	paddingTop: "2%"
+	paddingTop: "2%",
+	paddingBottom: "2%"
 }
 function PostsList(props){
+	console.log(props);
 	const posts = props.posts.map(post => {
 		return (
 			<Card  key={post.id}>
@@ -34,9 +36,32 @@ function PostsList(props){
 			</Card>
 		)
 	})
+	const friendPosts = props.friendsPosts.map(friendPost => {
+		return (
+			<Card  key={friendPost.id}>
+				<Card.Content >
+					<Card.Header>
+					{friendPost.user.username}
+					</Card.Header>
+					<br/>
+		    		{friendPost.bio}
+					<br/>
+					<br/>
+		    		<Card.Content>
+		    		{friendPost.date}
+		    		</Card.Content>
+	    		</Card.Content>
+	    		<CommentContainer
+	    		postId={friendPost.id}
+	    		/>
+			</Card>
+		)
+	})
 	return (
 		<div className="segment" style={post} >
 			<div>
+				{friendPosts}
+
 				{posts}
 			</div>
 		</div>
