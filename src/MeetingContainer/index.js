@@ -1,12 +1,14 @@
 import React from 'react'
 import MeetingList from './MeetingList'
 import NewMeetingModal from './NewMeetingModal'
+import EditMeetingModal from './EditMeetingModal'
 
 class MeetingContainer extends React.Component{
 	constructor(){
 		super()
 		this.state={
-			meetings: []
+			meetings: [],
+			idOfMeetingToEdit: -1
 
 		}
 	}
@@ -68,7 +70,42 @@ class MeetingContainer extends React.Component{
 			console.log(err)	
 		}
 	}
+	updateMeeting =  async (meetingToUpdate) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/meetings/' + this.state.idOfMeetingToEdit
+		try{
+			const updateMeetingResponse = await fetch(url ,{
+				credentials: 'include',
+				method: 'PUT',
+				body: JSON.stringify(meetingToUpdate),
+				headers:{
+					'content-type': 'application/json'
+				}
+			})
+			const updateMeetingJson = await updateMeetingResponse.json()
+			if(updateMeetingResponse.status === 200){
+				const meetings = this.state.meetings
+				const indexOfMeetingBeingUpdated = meetings.findIndex(meeting => meeting.id == this.state.idOfMeetingToEdit)
+				meetings[indexOfMeetingBeingUpdated] = updateMeetingJson.data
+				this.setState({
+					meetings: meetings,
+					idOfMeetingToEdit: -1
+				})
+			}
+		}catch(err){
+			console.log(err)	
+		}
+	}
+	editMeeting = (editMeeting) => {
+		this.setState({
+			idOfMeetingToEdit: editMeeting
 
+		})
+	}
+	closeModal = () =>{
+		this.setState({
+			idOfMeetingToEdit: -1
+		})
+	}
 	render(){
 		return(
 			<React.Fragment>
@@ -84,6 +121,7 @@ class MeetingContainer extends React.Component{
 				loggedIn={this.props.loggedIn}
 				deleteMeeting={this.deleteMeeting}
 				/>
+				<EditMeetingModal/>
 			</React.Fragment>
 
 
