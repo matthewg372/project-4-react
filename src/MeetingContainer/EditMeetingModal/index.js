@@ -2,20 +2,28 @@ import React from 'react'
 import {Form, Button, Label, Modal, Header} from 'semantic-ui-react'
 
 class NewMeetingModal extends React.Component{
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state={
-			info: '',
-			area: '',
-			time: '',
+			info: props.editMeeting.info,
+			area: props.editMeeting.area,
+			time: props.editMeeting.time,
 		}
 	}
+	handleChange = (e) => {
+		this.setState({
+			[e.target.name]: e.target.value
+		})
+		
+	}
+	handleSubmit = (e) => {
+		e.preventDefault()
+		this.props.updateMeeting(this.state)
+	}
+
 render(){
 		return(
-			<Modal 
-			closeIcon={true} 
-			trigger={<Button className="button">Add new</Button>}
-			>
+			<Modal open={true} closeIcon={true} >
 			<Header>
         	enter new info
       		</Header>

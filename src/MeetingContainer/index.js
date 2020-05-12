@@ -120,8 +120,16 @@ class MeetingContainer extends React.Component{
 				meetings={this.state.meetings}
 				loggedIn={this.props.loggedIn}
 				deleteMeeting={this.deleteMeeting}
+				editMeeting={this.editMeeting}
 				/>
-				<EditMeetingModal/>
+				{
+				this.state.idOfMeetingToEdit !== -1
+				&&
+				<EditMeetingModal
+				updateMeeting={this.updateMeeting}
+				editMeeting={this.state.meetings.find((meeting) => meeting.id === this.state.idOfMeetingToEdit)}
+				/>
+				}
 			</React.Fragment>
 
 
