@@ -34,19 +34,36 @@ class MeetingContainer extends React.Component{
 			const meetingsResponse = await fetch(url,{
 				credentials: 'include',
 				method: 'POST',
+				body: JSON.stringify(meetingToAdd),
 				headers:{
 					'content-type': 'application/json'
 				}
-				body: JSON.stringify(meetingToAdd)
 			})
 			const meetingsJson = await meetingsResponse.json()
 			if(meetingsResponse.status === 201){
 				this.setState({
-					meeting:[...this.state.meeting, meetingsJson]
+					meetings:[...this.state.meetings, meetingsJson]
 				})
-				this.getMeetings()
 			}
+				this.getMeetings()
 		
+		}catch(err){
+			console.log(err)	
+		}
+	}
+	deleteMeeting = async (meetingToDelete) =>{
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/meetings/' + meetingToDelete
+			const deleteMeetingResponse = await fetch(url ,{
+				credentials: 'include',
+				method: 'DELETE'
+			})
+			const deletedMeetingJson = await deleteMeetingResponse.json()
+			if(deleteMeetingResponse.status === 200){
+				this.setState({
+					meetings: this.state.meetings.filter(meeting => meeting.id != meetingToDelete)
+				})
+			}
 		}catch(err){
 			console.log(err)	
 		}
@@ -65,6 +82,7 @@ class MeetingContainer extends React.Component{
 				<MeetingList
 				meetings={this.state.meetings}
 				loggedIn={this.props.loggedIn}
+				deleteMeeting={this.deleteMeeting}
 				/>
 			</React.Fragment>
 

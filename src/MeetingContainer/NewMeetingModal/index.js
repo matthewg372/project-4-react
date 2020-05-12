@@ -10,6 +10,20 @@ class NewMeetingModal extends React.Component{
 			time: '',
 		}
 	}
+	handleChange = (e) => {
+		const state =  this.state
+		state[e.target.name] = e.target.value
+		this.setState(state)
+	}
+	handleSubmit = (e) => {
+		e.preventDefault()
+		this.props.addMeeting(this.state)
+		this.setState({
+			info: '',
+			area: '',
+			time: '',
+		})
+	}
 
 render(){
 		return(
