@@ -108,7 +108,9 @@ class App extends React.Component {
       {
       this.state.views === "ToDo"
       &&
-      <ToDoListContainer/>
+      <ToDoListContainer
+      userId={this.state.loggedInUserId}
+      />
       }
       {
       this.state.views === "myProfile"

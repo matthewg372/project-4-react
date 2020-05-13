@@ -87,14 +87,14 @@ class ProfileContainer extends React.Component{
 		try{
 			const url = process.env.REACT_APP_API_URL + '/api/v1/profiles/user/' + this.props.userId
 			console.log(url);
-			const productsResponse = await fetch(url,{
+			const profilesResponse = await fetch(url,{
 				credentials: 'include'
 			})
-			const productsJson = await productsResponse.json()
-			console.log(productsJson.data);
-			if(productsResponse.status === 200){
+			const profileJson = await profilesResponse.json()
+			console.log(profileJson.data);
+			if(profilesResponse.status === 200){
 				this.setState({
-					profile: productsJson.data,
+					profile: profileJson.data,
 					userHasProfile: 1
 				})
 			}
