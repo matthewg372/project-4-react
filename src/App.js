@@ -6,7 +6,9 @@ import Header from './Header'
 import SideBar from './SideBar'
 import FriendshipContainer from './FriendshipContainer'
 import MeetingContainer from './MeetingContainer'
+import ToDoListContainer from './ToDoListContainer'
 import './App.css';
+
 
 class App extends React.Component {
   constructor(){
@@ -103,6 +105,11 @@ class App extends React.Component {
       loggedIn={this.state.loggedIn}
       switchViews={this.switchViews}
       />
+      {
+      this.state.views === "ToDo"
+      &&
+      <ToDoListContainer/>
+      }
       {
       this.state.views === "myProfile"
       &&

@@ -2,7 +2,8 @@ import React from 'react'
 import NewProfileForm from './NewProfileForm'
 import UserProfile from './UserProfile'
 import EditProfileModal from './EditProfileModal'
-import UserPosts from '../PostContainer/UserPosts'
+import UserPosts from '../PostContainer/UserPosts'		    
+import {Image, Transformation, CloudinaryContext} from 'cloudinary-react';
 
 
 
@@ -15,6 +16,7 @@ class ProfileContainer extends React.Component{
 			profile: [],
 			userId: '',
 			userHasProfile: 0,
+			images: [],
 		}
 	}
 	componentDidMount() {

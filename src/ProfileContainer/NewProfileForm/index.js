@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form, Button, Label, Modal, Header} from 'semantic-ui-react'
 
-class NewProductForm extends React.Component{
+class NewProfileForm extends React.Component{
 	constructor(){
 		super()
 		this.state={
@@ -13,6 +13,28 @@ class NewProductForm extends React.Component{
 			sponsor: false,
 		}
 	}
+	uploadPicture = async (e) => {
+
+	    const files = e.target.files 
+	    const data = new FormData();
+	    data.append("file", files[0]);
+	    data.append("upload_preset", "matt372");
+	    const response = await fetch(
+	      "https://api.cloudinary.com/v1_1/matt372/image/upload",
+	      {
+	        method: "POST",
+	        body: data,
+	        headers:{
+	        	'content-type': 'application/json'
+	        }
+	      }
+	    );
+	    const file = await response.json();
+	    console.log(file);
+	    this.setState({
+	    	images: file.secure_url
+	    })
+	  }
 	handleChange = (e) => {
 		const state =  this.state
 		state[e.target.name] = e.target.value
@@ -42,13 +64,12 @@ render(){
       		</Header>
       		<Modal.Content >
 			<Form onSubmit={this.handleSubmit}>
-				<Label>images:</Label>
+				<Label>Profile Photo:</Label>	
 				<Form.Input
-					type='text'
+					type='file'
 					name='images'
-					value={this.state.images}
-					onChange={this.handleChange}
-				/>
+					onChange={this.uploadPicture}	
+					/>
 				<Label>First Name:</Label>
 				<Form.Input
 					type='text'
@@ -93,4 +114,4 @@ render(){
 	}
 
 }
-export default NewProductForm
+export default NewProfileForm

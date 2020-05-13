@@ -48,6 +48,11 @@ function Header(props){
 			&&	
 			<Menu.Item onClick={props.logout}> Logout</Menu.Item>
 			}
+			{
+			props.loggedIn
+			&&	
+			<Menu.Item onClick={() => props.switchViews("ToDo")}> To Do List</Menu.Item>
+			}
 
 			{
 			!props.loggedIn
