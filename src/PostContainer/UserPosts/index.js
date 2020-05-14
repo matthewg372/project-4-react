@@ -8,6 +8,11 @@ const post = {
 	paddingBottom: "2%"
 }
 function PostsList(props){
+	const image ={
+		height: '200px',
+		width: '270px',
+		padding: '10px'
+	}
 const profile = props.profile.map(profile => {
 		return (
 			<Card  key={profile.id}>
@@ -31,7 +36,9 @@ const profile = props.profile.map(profile => {
 					<Card.Header>
 					{post.user.username}
 					</Card.Header>
-					<br/>
+					<Card.Content>
+					<img src={post.images} style={image}/>
+					</Card.Content>
 					{post.bio}
 					<br/>
 					<br/>

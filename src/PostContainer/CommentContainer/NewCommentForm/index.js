@@ -6,6 +6,7 @@ class NewCommentForm extends React.Component{
 		super()
 		this.state = {
 			bio: '',
+			images: ''
 
 		}
 	}
@@ -19,6 +20,7 @@ class NewCommentForm extends React.Component{
 		this.props.addComment(this.state)
 		this.setState({
 			bio: '',
+			images: ''
 		})
 	}
 
