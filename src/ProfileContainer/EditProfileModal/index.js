@@ -13,6 +13,25 @@ class EditProfileModal extends React.Component{
 			sponsor: props.editProfile.sponsor
 		}
 	}
+
+	uploadPicture = async (e) => {
+
+	    const files = e.target.files 
+	    const data = new FormData();
+	    data.append("file", files[0]);
+	    data.append("upload_preset", "tu0wwnqy");
+	    const response = await fetch(
+	      "https://api.cloudinary.com/v1_1/matt372/image/upload",
+	      {
+	        method: "POST",
+	        body: data,
+	      }
+	    );
+	    const file = await response.json();
+	    this.setState({
+	    	images: file.secure_url
+	    })
+	  }
 	handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -36,11 +55,10 @@ render(){
 			<Form onSubmit={this.handleSubmit}>
 				<Label>images:</Label>
 				<Form.Input
-					type='text'
+					type='file'
 					name='images'
-					value={this.state.images}
-					onChange={this.handleChange}
-				/>
+					onChange={this.uploadPicture}	
+					/>
 				<Label>First Name:</Label>
 				<Form.Input
 					type='text'

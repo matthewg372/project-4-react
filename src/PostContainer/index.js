@@ -14,7 +14,8 @@ class PostContainer extends React.Component{
 			friendsPosts: [],
 			found: false,
 			id: '',
-			friendPost: []
+			friendPost: [],
+			profile: []
 
 		}
 	}
@@ -22,6 +23,7 @@ class PostContainer extends React.Component{
 		this.getPosts()
 		this.getFriends()
 		this.getFriendsPosts()
+		this.getUsersProfile()
 	}
 	addPost = async (postToAdd) => {
 		try{
@@ -148,6 +150,23 @@ class PostContainer extends React.Component{
 		}
 
 	}
+	getUsersProfile = async () => {
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/profiles/user/' + this.props.userId
+			const profilesResponse = await fetch(url,{
+				credentials: 'include'
+			})
+			const profileJson = await profilesResponse.json()
+			console.log(profileJson);
+			if(profilesResponse.status === 200){
+				this.setState({
+					profile: profileJson.data,
+				})
+			}
+		}catch(err){
+			console.log(err)	
+		}
+	}
 	render(){
 		return (
 			<React.Fragment>
@@ -167,6 +186,7 @@ class PostContainer extends React.Component{
 				posts={this.state.getPosts}
 				editPost={this.editPost}
 				friendsPosts={this.state.friendPost}
+				profile={this.state.profile}
 				/>
 
 				}

@@ -1,6 +1,6 @@
 import React from 'react'
 import CommentContainer from '../CommentContainer'
-import { Card , Feed, Button, Dropdown} from 'semantic-ui-react'
+import { Card , Feed, Button, Dropdown, Comment} from 'semantic-ui-react'
 
 const post = {
 	paddingLeft: "40%",
@@ -8,7 +8,16 @@ const post = {
 	paddingBottom: "2%"
 }
 function PostsList(props){
-	console.log(props);
+const profile = props.profile.map(profile => {
+		return (
+			<Card  key={profile.id}>
+				  <Comment.Avatar src={profile.images} />
+				  <Comment.Content>
+				    <Comment.Author as='a'>{profile.username}</Comment.Author>
+				  </Comment.Content>
+			</Card>
+		)
+	})
 	const posts = props.posts.map(post => {
 		return (
 			<Card  key={post.id}>

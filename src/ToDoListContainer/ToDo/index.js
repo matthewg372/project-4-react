@@ -4,7 +4,7 @@ import { Card , Feed, Button, Dropdown} from 'semantic-ui-react'
 function ToDo(props){
 	const ToDos = props.ToDos.map(ToDo => {
 		return (
-			<Card  key={ToDo.id}>
+			<Card key={ToDo.id}>
 				{
 				props.loggedIn
 				&&

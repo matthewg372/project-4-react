@@ -107,9 +107,7 @@ class CommentContainer extends React.Component{
 		})
 	}
 
-  handleCheckbox = (e, { checked }) => this.setState({ collapsed: checked })
 	render(){
-		const { collapsed } = this.state
 		return(
 			<div>
 				<NewCommentForm

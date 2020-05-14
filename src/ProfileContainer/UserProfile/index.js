@@ -5,7 +5,7 @@ function UserProfile(props){
 	const profile = props.profile.map(profile => {
 		return (
   <div key={profile.id}>
-    <Image src='images/no-profile-picture-icon-14.png' size='medium' circular />
+    <Image src={profile.images} size='medium' circular />
     <Container textAlign='justified'>
       	<b>{profile.first_name} {profile.last_name}</b>
       	<Divider />

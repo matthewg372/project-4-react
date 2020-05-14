@@ -3,6 +3,7 @@ import { Comment , Header, Button, Form, Dropdown} from 'semantic-ui-react'
 function CommentsList(props){
 
 	const comments = props.comments.map(comment => {
+		console.log(comment.user);
 		return (
 			<Comment.Group key={comment.id}>
 				<Dropdown text='Edit/Delete'>
@@ -12,7 +13,7 @@ function CommentsList(props){
 				    </Dropdown.Menu>
 			 	</Dropdown>
 			<Comment>
-			  <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
+			  <Comment.Avatar src={comment.user.images} />
 			  <Comment.Content>
 			    <Comment.Author as='a'>{comment.user.username}</Comment.Author>
 			    <Comment.Metadata>

@@ -26,7 +26,6 @@ class ProfileContainer extends React.Component{
 		this.getUsersProfile()
 	}
 	addProfile = async (profileToAdd) => {
-		console.log(profileToAdd);
 		try{
 			const url = process.env.REACT_APP_API_URL + '/api/v1/profiles/'
 			const createProfileResponse = await fetch(url,{
@@ -38,10 +37,10 @@ class ProfileContainer extends React.Component{
 				body: JSON.stringify(profileToAdd)
 			})
 			const createProfileJson = await createProfileResponse.json()
-			console.log(createProfileResponse);
 			if(createProfileResponse.status === 201){
 				this.setState({
-					addProfile:[...this.state.addProfile, createProfileJson]
+					addProfile:[...this.state.addProfile, createProfileJson],
+					userHasProfile: 1
 				})
 			}
 			this.getUsersProfile()
@@ -58,7 +57,6 @@ class ProfileContainer extends React.Component{
 	}
 	updateProfile =  async (profileToUpdate) => {
 		const url = process.env.REACT_APP_API_URL + '/api/v1/profiles/' + this.state.idOfProfileToEdit
-		console.log(url);
 		try{
 			const updateProfileResponse = await fetch(url ,{
 				credentials: 'include',
@@ -69,7 +67,6 @@ class ProfileContainer extends React.Component{
 				}
 			})
 			const updateProfileJson = await updateProfileResponse.json()
-			console.log(updateProfileJson);
 			if(updateProfileResponse.status === 200){
 				const profile = this.state.profile
 				const indexOfProfileBeingUpdated = profile.findIndex(profile => profile.id == this.state.idOfProfileToEdit)
@@ -86,15 +83,18 @@ class ProfileContainer extends React.Component{
 	getUsersProfile = async () => {
 		try{
 			const url = process.env.REACT_APP_API_URL + '/api/v1/profiles/user/' + this.props.userId
-			console.log(url);
 			const profilesResponse = await fetch(url,{
 				credentials: 'include'
 			})
 			const profileJson = await profilesResponse.json()
-			console.log(profileJson.data);
+			console.log(profileJson);
 			if(profilesResponse.status === 200){
 				this.setState({
 					profile: profileJson.data,
+				})
+			}
+			if(profileJson.message === "Successfully found 1 profile"){
+				this.setState({
 					userHasProfile: 1
 				})
 			}
@@ -111,7 +111,11 @@ class ProfileContainer extends React.Component{
 	render(){
 		return(
 			<div>
+			{
+			this.state.userHasProfile == 0
+			&&
 			<NewProfileForm addProfile={this.addProfile}/>
+			}
 			<UserProfile 
 			profile={this.state.profile}
 			editProfile={this.editProfile}

@@ -2,6 +2,11 @@ import React from 'react'
 import { Card , Feed, Button, Dropdown} from 'semantic-ui-react'
 
 function MeetingsList(props){
+	const list = {
+		marginLeft: "40%",
+		marginTop: "30%",
+		marginBottom: "5%"
+	}
 	const meetings = props.meetings.map(meeting => {
 		return (
 			<Card  key={meeting.id}>
@@ -36,7 +41,7 @@ function MeetingsList(props){
 	})
 	return (
 		<div className="segment" >
-			<div>
+			<div style={list}>
 				{meetings}
 			</div>
 		</div>

@@ -11,6 +11,7 @@ class NewProfileForm extends React.Component{
 			days_sober: '',
 			date_of_birth: '',
 			sponsor: false,
+			selectedFile: null
 		}
 	}
 	uploadPicture = async (e) => {
@@ -18,19 +19,15 @@ class NewProfileForm extends React.Component{
 	    const files = e.target.files 
 	    const data = new FormData();
 	    data.append("file", files[0]);
-	    data.append("upload_preset", "matt372");
+	    data.append("upload_preset", "tu0wwnqy");
 	    const response = await fetch(
 	      "https://api.cloudinary.com/v1_1/matt372/image/upload",
 	      {
 	        method: "POST",
 	        body: data,
-	        headers:{
-	        	'content-type': 'application/json'
-	        }
 	      }
 	    );
 	    const file = await response.json();
-	    console.log(file);
 	    this.setState({
 	    	images: file.secure_url
 	    })
@@ -54,6 +51,7 @@ class NewProfileForm extends React.Component{
 	}
 
 render(){
+	    console.log(this.state.images);
 		return(
 			<Modal 
 			closeIcon={true} 

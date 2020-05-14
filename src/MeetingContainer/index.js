@@ -2,6 +2,7 @@ import React from 'react'
 import MeetingList from './MeetingList'
 import NewMeetingModal from './NewMeetingModal'
 import EditMeetingModal from './EditMeetingModal'
+import MapContainer from './MapContainer'
 
 class MeetingContainer extends React.Component{
 	constructor(){
@@ -32,6 +33,7 @@ class MeetingContainer extends React.Component{
 	}
 	addMeeting = async (meetingToAdd) => {
 		try{
+			console.log("ADDED", meetingToAdd);
 			const url = process.env.REACT_APP_API_URL + '/api/v1/meetings/'
 			const meetingsResponse = await fetch(url,{
 				credentials: 'include',
@@ -107,6 +109,7 @@ class MeetingContainer extends React.Component{
 		})
 	}
 	render(){
+		console.log(this.state.meetings);
 		return(
 			<React.Fragment>
 				{
@@ -116,6 +119,9 @@ class MeetingContainer extends React.Component{
 				addMeeting={this.addMeeting}
 				/>
 				}
+				<MapContainer
+				meetings={this.state.meetings}
+				/>
 				<MeetingList
 				meetings={this.state.meetings}
 				loggedIn={this.props.loggedIn}

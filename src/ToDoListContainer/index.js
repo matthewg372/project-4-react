@@ -1,12 +1,14 @@
 import React from 'react'
 import NewToDoForm from './NewToDoForm'
 import ToDo from './ToDo'
+import EditToDoModal from './EditToDoModal'
 
 class ToDoList extends React.Component{
 	constructor(){
 		super()
 		this.state ={
-			ToDo: [],
+			item: [],
+			idOfToDoToEdit: -1
 
 		}
 	}
@@ -16,15 +18,13 @@ class ToDoList extends React.Component{
 	getToDo = async () => {
 		try{
 			const url = process.env.REACT_APP_API_URL + '/api/v1/to_do_lists/users/' + this.props.userId
-			console.log(url);
 			const toDosResponse = await fetch(url,{
 				credentials: 'include'
 			})
 			const toDosJson = await toDosResponse.json()
-			console.log(toDosJson.data);
 			if(toDosResponse.status === 200){
 				this.setState({
-					ToDo: toDosJson.data,
+					item: toDosJson.data,
 				})
 			}
 		}catch(err){
@@ -46,15 +46,63 @@ class ToDoList extends React.Component{
 			const createToDoJson = await createToDoResponse.json()
 			if(createToDoResponse.status === 200){
 				this.setState({
-					ToDo:[...this.state.ToDo, createToDoJson]
+					item:[...this.state.item, createToDoJson]
 				})
 			}
+			this.getToDo()
 			
 		
 		}catch(err){
 			console.log(err)	
 		}
-	}	
+	}
+	deleteToDo = async (toDoDelete) =>{
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/to_do_lists/' + toDoDelete
+			const deleteToDoResponse = await fetch(url ,{
+				credentials: 'include',
+				method: 'DELETE'
+			})
+			const deletedToDoJson = await deleteToDoResponse.json()
+			if(deleteToDoResponse.status === 200){
+				this.setState({
+					item: this.state.item.filter(item => item.id != toDoDelete)
+				})
+			}
+		}catch(err){
+			console.log(err)	
+		}
+	}
+	updateToDo =  async (toDoToUpdate) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/to_do_lists/' + this.state.idOfToDoToEdit
+		try{
+			const updateToDoResponse = await fetch(url ,{
+				credentials: 'include',
+				method: 'PUT',
+				body: JSON.stringify(toDoToUpdate),
+				headers:{
+					'content-type': 'application/json'
+				}
+			})
+			const updateItemJson = await updateToDoResponse.json()
+			if(updateToDoResponse.status === 200){
+				const item = this.state.item
+				const indexOfTodoBeingUpdated = item.findIndex(item => item.id == this.state.idOfToDoToEdit)
+				item[indexOfTodoBeingUpdated] = updateItemJson.data
+				this.setState({
+					item: item,
+					idOfToDoToEdit: -1
+				})
+			}
+		}catch(err){
+			console.log(err)	
+		}
+	}
+	editToDo = (editToDo) =>{
+		this.setState({
+			idOfToDoToEdit: editToDo
+		})
+	}
 	render(){
 		return(
 			<div>
@@ -62,8 +110,20 @@ class ToDoList extends React.Component{
 				addToDo={this.addToDo}
 				/>
 				<ToDo
-				ToDos={this.state.ToDo}
+				ToDos={this.state.item}
+				loggedIn={this.props.loggedIn}
+				deleteToDo={this.deleteToDo}
+				editToDo={this.editToDo}
 				/>
+				{
+				this.state.idOfToDoToEdit !== -1
+				&&
+				<EditToDoModal
+				updateToDo={this.updateToDo}
+				editToDo={this.state.item.find((item) => item.id === this.state.idOfToDoToEdit)}
+				closeModal={this.closeModal}
+				/>
+				}
 			</div>
 			
 		)

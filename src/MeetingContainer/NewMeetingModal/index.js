@@ -1,6 +1,6 @@
 import React from 'react'
 import {Form, Button, Label, Modal, Header} from 'semantic-ui-react'
-
+import { GoogleComponent } from 'react-google-location'
 class NewMeetingModal extends React.Component{
 	constructor(){
 		super()
@@ -8,6 +8,8 @@ class NewMeetingModal extends React.Component{
 			info: '',
 			area: '',
 			time: '',
+			longitude: '',
+			lat: ''
 		}
 	}
 	handleChange = (e) => {
@@ -17,11 +19,19 @@ class NewMeetingModal extends React.Component{
 	}
 	handleSubmit = (e) => {
 		e.preventDefault()
-		this.props.addMeeting(this.state)
+		this.props.addMeeting({
+			info: this.state.info,
+			area: this.state.area.place,
+			time: this.state.time,
+			lat: this.state.area.coordinates.lat,
+			longitude: this.state.area.coordinates.lng
+		})
 		this.setState({
 			info: '',
 			area: '',
 			time: '',
+			longitude: '',
+			lat: '',
 		})
 	}
 
@@ -51,12 +61,13 @@ render(){
 					onChange={this.handleChange}
 				/>
 				<Label>Area:</Label>
-				<Form.Input
-					type='text'
-					name='area'
-					value={this.state.area}
-					onChange={this.handleChange}
-				/>
+         		<GoogleComponent
+		          apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+		          language={'en'}
+		          country={'country:in|country:us'}
+		          coordinates={true}
+		          locationBoxStyle={'custom-style'}
+		          onChange={(e) => { this.setState({ area: e }) }} />
 				<Button type='Submit'>Add</Button>
 			</Form>
 			</Modal.Content>

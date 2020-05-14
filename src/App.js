@@ -37,6 +37,8 @@ class App extends React.Component {
           this.setState({
             loggedIn: true,
             loggedInUserEmail: registerJson.data.email,
+            loggedInUserId: registerJson.data.id,
+            views: "myProfile"
 
         })
       }
@@ -110,6 +112,7 @@ class App extends React.Component {
       &&
       <ToDoListContainer
       userId={this.state.loggedInUserId}
+      loggedIn={this.state.loggedIn}
       />
       }
       {
