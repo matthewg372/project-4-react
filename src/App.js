@@ -9,7 +9,6 @@ import MeetingContainer from './MeetingContainer'
 import ToDoListContainer from './ToDoListContainer'
 import './App.css';
 
-
 class App extends React.Component {
   constructor(){
     super()

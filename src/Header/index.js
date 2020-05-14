@@ -8,7 +8,8 @@ function Header(props){
 	    padding: "10px",
 	    color: "white",
 	    backgroundColor: "black"
-	  }	
+	  }
+
 	return(
 		<div style={divStyle}>
 			<h1>AH</h1>
@@ -61,6 +62,7 @@ function Header(props){
 			}
 
 		</Menu>
+
 		</div>
 
 
