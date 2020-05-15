@@ -3,7 +3,8 @@ import CommentContainer from '../CommentContainer'
 import { Card , Feed, Button, Dropdown, Comment} from 'semantic-ui-react'
 
 const post = {
-	paddingLeft: "40%",
+	width: "300%",
+	paddingLeft: "10%",
 	paddingTop: "2%",
 	paddingBottom: "2%"
 }
@@ -15,7 +16,7 @@ function PostsList(props){
 	}
 const profile = props.profile.map(profile => {
 		return (
-			<Card  key={profile.id}>
+			<Card  key={profile.id} style={post}>
 				  <Comment.Avatar src={profile.images} />
 				  <Comment.Content>
 				    <Comment.Author as='a'>{profile.username}</Comment.Author>
@@ -25,23 +26,23 @@ const profile = props.profile.map(profile => {
 	})
 	const posts = props.posts.map(post => {
 		return (
-			<Card  key={post.id}>
-				<Dropdown text='settings'>
+			<Card  key={post.id} style={post}>
+				<Dropdown text='settings' style={post}>
 				    <Dropdown.Menu>
 				    <Dropdown.Item text='Delete' onClick={() => props.deletePost(post.id)} />
 				    <Dropdown.Item text='Edit' onClick={() => props.editPost(post.id)} />
 				    </Dropdown.Menu>
 			 	</Dropdown>
-				<Card.Content >
+				<Card.Content style={post}>
 					<Card.Header>
 					{post.user.username}
 					</Card.Header>
 					<Card.Content>
 					{
-						post.images === ""
-						?
-						null 
-						:
+					post.images === ""
+					?
+					null 
+					:
 					<img src={post.images} style={image}/>
 					}
 					</Card.Content>
@@ -60,7 +61,7 @@ const profile = props.profile.map(profile => {
 	})
 	const Posts = props.friendPost.map(post => {
 		return (
-			<Card  key={post.id}>
+			<Card  key={post.id} style={post}> 
 				<Card.Content >
 					<Card.Header>
 					{post.user.username}
@@ -88,8 +89,8 @@ const profile = props.profile.map(profile => {
 		)
 	})
 	return (
-		<div className="segment" style={post} >
-			<div>
+		<div className="segment" style={post}>
+			<div >
 
 				{posts}
 				{Posts}

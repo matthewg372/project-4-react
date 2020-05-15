@@ -109,6 +109,7 @@ class PostContainer extends React.Component{
 					idOfPostToEdit: -1
 				})
 			}
+			this.getPosts()
 		}catch(err){
 			console.log(err)	
 		}
@@ -173,7 +174,6 @@ class PostContainer extends React.Component{
 				&&
 				<NewPostForm
 				addPost={this.addPost}
-				getPosts={this.props.getPosts}
 				/>
 				}
 				{
@@ -193,7 +193,7 @@ class PostContainer extends React.Component{
 				&&					
 				<UserEditPostModal
 				updatePost={this.updatePost}
-				editPost={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
+				editPost={this.state.getPosts.find((post) => post.id === this.state.idOfPostToEdit)}
 				closeModal={this.closeModal}
 				/>
 				}
