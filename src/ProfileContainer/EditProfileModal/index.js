@@ -82,7 +82,7 @@ render(){
 				/>
 				<Label>Date Of Birth:</Label>
 				<Form.Input
-					type='number'
+					type='text'
 					name='date_of_birth'
 					value={this.state.date_of_birth}
 					onChange={this.handleChange}
