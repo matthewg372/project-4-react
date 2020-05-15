@@ -10,7 +10,7 @@ class NewProfileForm extends React.Component{
 			last_name: '',
 			days_sober: '',
 			date_of_birth: '',
-			sponsor: false,
+			sponsor: 'False',
 			selectedFile: null
 		}
 	}
@@ -46,7 +46,7 @@ class NewProfileForm extends React.Component{
 			last_name: '',
 			days_sober: '',
 			date_of_birth: '',
-			sponsor: false,
+			sponsor: 'False',
 		})
 	}
 

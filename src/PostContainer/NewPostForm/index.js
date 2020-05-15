@@ -45,7 +45,6 @@ class NewPostForm extends React.Component{
 			bio: '',
 			images: ''
 		})
-		this.props.getPosts()
 	}
 	render(){
 		return(
