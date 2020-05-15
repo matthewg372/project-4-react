@@ -5,8 +5,7 @@ class NewCommentForm extends React.Component{
 	constructor(){
 		super()
 		this.state = {
-			bio: '',
-			images: ''
+			bio: ''
 
 		}
 	}
@@ -19,8 +18,7 @@ class NewCommentForm extends React.Component{
 		e.preventDefault()
 		this.props.addComment(this.state)
 		this.setState({
-			bio: '',
-			images: ''
+			bio: ''
 		})
 	}
 

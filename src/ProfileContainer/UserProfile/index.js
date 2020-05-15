@@ -3,7 +3,6 @@ import { Container, Divider, Image, Button} from 'semantic-ui-react'
 
 function UserProfile(props){
 	const profile = props.profile.map(profile => {
-  console.log(profile.sponsor);
 		return (
   <div key={profile.id}>
     <Image src={profile.images} size='medium' circular />

@@ -37,7 +37,13 @@ const profile = props.profile.map(profile => {
 					{post.user.username}
 					</Card.Header>
 					<Card.Content>
+					{
+						post.images === ""
+						?
+						null 
+						:
 					<img src={post.images} style={image}/>
+					}
 					</Card.Content>
 					{post.bio}
 					<br/>
@@ -52,23 +58,31 @@ const profile = props.profile.map(profile => {
 			</Card>
 		)
 	})
-	const friendPosts = props.friendsPosts.map(friendPost => {
+	const Posts = props.friendPost.map(post => {
 		return (
-			<Card  key={friendPost.id}>
+			<Card  key={post.id}>
 				<Card.Content >
 					<Card.Header>
-					{friendPost.user.username}
+					{post.user.username}
 					</Card.Header>
-					<br/>
-		    		{friendPost.bio}
+					<Card.Content>
+					{
+					post.images === ""
+					?
+					null 
+					:
+					<img src={post.images} style={image}/>
+					}
+					</Card.Content>
+					{post.bio}
 					<br/>
 					<br/>
 		    		<Card.Content>
-		    		{friendPost.date}
+		    		{post.date}
 		    		</Card.Content>
 	    		</Card.Content>
 	    		<CommentContainer
-	    		postId={friendPost.id}
+	    		postId={post.id}
 	    		/>
 			</Card>
 		)
@@ -76,9 +90,9 @@ const profile = props.profile.map(profile => {
 	return (
 		<div className="segment" style={post} >
 			<div>
-				{friendPosts}
 
 				{posts}
+				{Posts}
 			</div>
 		</div>
 	)

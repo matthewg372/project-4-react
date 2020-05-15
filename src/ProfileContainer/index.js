@@ -87,7 +87,6 @@ class ProfileContainer extends React.Component{
 				credentials: 'include'
 			})
 			const profileJson = await profilesResponse.json()
-			console.log(profileJson);
 			if(profilesResponse.status === 200){
 				this.setState({
 					profile: profileJson.data,

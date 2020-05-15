@@ -64,7 +64,7 @@ render(){
          		<GoogleComponent
 		          apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
 		          language={'en'}
-		          country={'country:in|country:us'}
+		          country={'country:us'}
 		          coordinates={true}
 		          locationBoxStyle={'custom-style'}
 		          onChange={(e) => { this.setState({ area: e }) }} />

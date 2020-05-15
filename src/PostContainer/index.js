@@ -56,7 +56,6 @@ class PostContainer extends React.Component{
 				credentials: 'include'
 			})
 			const postsJson = await postsResponse.json()
-			console.log(postsJson.data);
 			this.setState({
 				getPosts: postsJson.data,
 			})
@@ -157,7 +156,6 @@ class PostContainer extends React.Component{
 				credentials: 'include'
 			})
 			const profileJson = await profilesResponse.json()
-			console.log(profileJson);
 			if(profilesResponse.status === 200){
 				this.setState({
 					profile: profileJson.data,
@@ -184,8 +182,8 @@ class PostContainer extends React.Component{
 				<UserPosts
 				deletePost={this.deletePost}
 				posts={this.state.getPosts}
+				friendPost={this.state.friendPost}
 				editPost={this.editPost}
-				friendsPosts={this.state.friendPost}
 				profile={this.state.profile}
 				/>
 

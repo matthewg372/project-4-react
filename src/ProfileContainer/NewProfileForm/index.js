@@ -51,7 +51,6 @@ class NewProfileForm extends React.Component{
 	}
 
 render(){
-	    console.log(this.state.images);
 		return(
 			<Modal 
 			closeIcon={true} 
