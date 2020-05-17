@@ -35,10 +35,9 @@ class App extends React.Component {
         const registerJson = await registerResponse.json()
         if(registerResponse.status === 201){
           this.setState({
-            loggedIn: true,
             loggedInUserEmail: registerJson.data.email,
             loggedInUserId: registerJson.data.id,
-            views: "myProfile"
+            views: "login"
 
         })
       }
