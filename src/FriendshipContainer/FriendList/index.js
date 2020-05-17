@@ -3,13 +3,12 @@ import {Card, Button} from 'semantic-ui-react'
 
 function FriendList(props){
 	const friends = props.friends.map(friend =>{
-		console.log(friend);
 
 		return(
 			<Card key={friend.id}>
 			<Card.Content >
 				<Card.Header>Username: {friend.user.username}</Card.Header>
-				<Card.Description>Sponsor: </Card.Description>
+				<Card.Description>Sponsor: {friend.sponsor}</Card.Description>
 				<Card.Content>Days Sober: {friend.days_sober}</Card.Content>
 			</Card.Content>
 			<Card.Content>
