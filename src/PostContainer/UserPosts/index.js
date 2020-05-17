@@ -1,18 +1,19 @@
 import React from 'react'
 import CommentContainer from '../CommentContainer'
 import { Card , Feed, Button, Dropdown, Comment} from 'semantic-ui-react'
-
+import './index.css'
 const post = {
-	width: "300%",
+	width: "500%",
 	paddingLeft: "10%",
 	paddingTop: "2%",
 	paddingBottom: "2%"
 }
 function PostsList(props){
 	const image ={
-		height: '200px',
-		width: '270px',
-		padding: '10px'
+		height: '50%',
+		width: '50%',
+		padding: '10px',
+		marginLeft: '25%'
 	}
 const profile = props.profile.map(profile => {
 		return (
@@ -27,7 +28,7 @@ const profile = props.profile.map(profile => {
 	const posts = props.posts.map(post => {
 		return (
 			<Card  key={post.id} style={post}>
-				<Dropdown text='settings' style={post}>
+				<Dropdown text='Settings' style={post}>
 				    <Dropdown.Menu>
 				    <Dropdown.Item text='Delete' onClick={() => props.deletePost(post.id)} />
 				    <Dropdown.Item text='Edit' onClick={() => props.editPost(post.id)} />

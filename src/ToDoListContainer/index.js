@@ -104,11 +104,26 @@ class ToDoList extends React.Component{
 		})
 	}
 	render(){
+		const button = {
+			marginLeft: "3%",
+			marginTop: "2%"
+		}
+		const h2 = {
+			marginTop:"2%",
+			marginLeft: "2%"
+		}
 		return(
 			<div>
-				<NewToDoForm
-				addToDo={this.addToDo}
-				/>
+				<h2 style={h2}>
+					To-Do list for this week.
+				</h2>
+				<div style={button}>
+					<NewToDoForm 
+					
+					addToDo={this.addToDo}
+					/>
+				</div>
+
 				<ToDo
 				ToDos={this.state.item}
 				loggedIn={this.props.loggedIn}

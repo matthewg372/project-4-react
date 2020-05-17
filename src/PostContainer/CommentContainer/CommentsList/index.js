@@ -17,20 +17,14 @@ function CommentsList(props){
 			  <Comment.Content>
 			    <Comment.Author as='a'>{comment.user.username}</Comment.Author>
 			    <Comment.Metadata>
-			      <div>Today at 5:42PM</div>
+			      <div>{comment.date}</div>
 			    </Comment.Metadata>
 			    <Comment.Text>{comment.bio}</Comment.Text>
-			    <Comment.Actions>
-			      <Comment.Action>Reply</Comment.Action>
-			    </Comment.Actions>
 			  </Comment.Content>
 			</Comment>
 			</Comment.Group>
-
-
 		)
 	})
-
   	return(
   		<div>
   		{comments}

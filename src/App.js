@@ -7,6 +7,7 @@ import SideBar from './SideBar'
 import FriendshipContainer from './FriendshipContainer'
 import MeetingContainer from './MeetingContainer'
 import ToDoListContainer from './ToDoListContainer'
+import AA from './A.A.'
 import './App.css';
 
 class App extends React.Component {
@@ -113,6 +114,11 @@ class App extends React.Component {
       userId={this.state.loggedInUserId}
       loggedIn={this.state.loggedIn}
       />
+      }
+      {
+      this.state.views === "AA"
+      &&
+      <AA/>
       }
       {
       this.state.views === "myProfile"

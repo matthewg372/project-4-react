@@ -9,11 +9,10 @@ function Header(props){
 	    color: "white",
 	    backgroundColor: "black"
 	  }
-
 	return(
 		<div style={divStyle}>
 			<h1>AH</h1>
-		<Menu>
+		<Menu >
 			<Menu.Item name="meeting" onClick={() => props.switchViews("meetings")}>
 			Meetings
 			</Menu.Item>
@@ -47,7 +46,7 @@ function Header(props){
 			{
 			props.loggedIn
 			&&	
-			<Menu.Item onClick={() => props.switchViews("ToDo")}> To Do List</Menu.Item>
+			<Menu.Item onClick={() => props.switchViews("ToDo")}> To-Do List</Menu.Item>
 			}
 			{
 			props.loggedIn
@@ -58,7 +57,12 @@ function Header(props){
 			{
 			!props.loggedIn
 			&&	
-			<Menu.Item onClick={() => props.switchViews("login")}> login</Menu.Item>
+			<Menu.Item onClick={() => props.switchViews("AA")}>A.A. Info</Menu.Item>
+			}
+			{
+			!props.loggedIn
+			&&	
+			<Menu.Item onClick={() => props.switchViews("login")}> Login</Menu.Item>
 			}
 
 		</Menu>

@@ -47,13 +47,10 @@ class EditProfileModal extends React.Component{
 render(){
 		return(
 			<div>
-			<Header>
-        	enter new info
-      		</Header>
 			<Modal open={true} closeIcon={true} closeModal={this.props.closeModal}>
       		<Modal.Content >
 			<Form onSubmit={this.handleSubmit}>
-				<Label>images:</Label>
+				<Label>Image:</Label>
 				<Form.Input
 					type='file'
 					name='images'
@@ -87,7 +84,7 @@ render(){
 					value={this.state.date_of_birth}
 					onChange={this.handleChange}
 				/>
-				<Label>sponsor:</Label>
+				<Label>Sponsor:</Label>
 				<Form.Input
 					type='text'
 					name='sponsor'

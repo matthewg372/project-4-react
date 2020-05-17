@@ -42,7 +42,7 @@ render(){
 			trigger={<Button className="button">Add new</Button>}
 			>
 			<Header>
-        	enter new info
+        	Enter New Info
       		</Header>
       		<Modal.Content >
 			<Form onSubmit={this.handleSubmit}>

@@ -106,14 +106,31 @@ class ProfileContainer extends React.Component{
 			idOfProfileToEdit: -1
 		})
 	}
-
 	render(){
+		const div = {
+			marginLeft: "35%",
+			marginTop: "10%"
+		}
+		const div2 = {
+			marginLeft: "15%",
+			marginTop: "5%"
+		}
+		const header = {
+			marginBottom: "3%"
+		}
 		return(
 			<div>
 			{
 			this.state.userHasProfile == 0
 			&&
+			<div style={div}>
+			<h1 style={header}>
+			Make Your Profile Before Continuing!
+			</h1>
+			<div style={div2}>
 			<NewProfileForm addProfile={this.addProfile}/>
+			</div>
+			</div>
 			}
 			<UserProfile 
 			profile={this.state.profile}

@@ -109,15 +109,25 @@ class MeetingContainer extends React.Component{
 		})
 	}
 	render(){
-		console.log(this.state.meetings);
+		const h2 = {
+			marginTop:"2%",
+			marginLeft: "2%"
+		}
 		return(
 			<React.Fragment>
+				<h2 style={h2}>
+					Add A Meeting In Your Area.
+				</h2>
+
 				{
 				this.props.loggedIn
 				&&
-				<NewMeetingModal
-				addMeeting={this.addMeeting}
-				/>
+				<div style={h2}>
+					<NewMeetingModal
+					addMeeting={this.addMeeting}
+					/>
+				</div>
+
 				}
 				<MapContainer
 				meetings={this.state.meetings}
@@ -132,6 +142,7 @@ class MeetingContainer extends React.Component{
 				this.state.idOfMeetingToEdit !== -1
 				&&
 				<EditMeetingModal
+				closeModal={this.closeModal}
 				updateMeeting={this.updateMeeting}
 				editMeeting={this.state.meetings.find((meeting) => meeting.id === this.state.idOfMeetingToEdit)}
 				/>

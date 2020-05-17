@@ -8,7 +8,7 @@ function ToDo(props){
 				{
 				props.loggedIn
 				&&
-				<Dropdown text='settings'>
+				<Dropdown text='Options'>
 				    <Dropdown.Menu>
 				    <Dropdown.Item text='Delete' onClick={() => props.deleteToDo(ToDo.id)} />
 				    <Dropdown.Item text='Edit' onClick={() => props.editToDo(ToDo.id)} />
@@ -21,9 +21,14 @@ function ToDo(props){
 			</Card>
 		)
 	})
+	const div = {
+		marginLeft: "8%",
+		marginTop: "2%",
+		width: "200%"
+	}
 	return (
 		<div className="segment" >
-			<div>
+			<div style={div}>
 				{ToDos}
 			</div>
 		</div>

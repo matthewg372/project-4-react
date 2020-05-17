@@ -167,14 +167,28 @@ class PostContainer extends React.Component{
 		}
 	}
 	render(){
+		const div = {
+			marginLeft: "2%",
+			marginTop: "2%"
+		}
+		const h2 = {
+			marginTop:"2%",
+			marginLeft: "2%"
+		}
 		return (
 			<React.Fragment>
+				<h2 style={h2}>
+				Add A Post
+				</h2>
 				{
 				this.props.loggedIn
 				&&
-				<NewPostForm
-				addPost={this.addPost}
+				<div style={div}>
+					<NewPostForm
+					addPost={this.addPost}
 				/>
+				</div>
+
 				}
 				{
 				this.props.loggedIn

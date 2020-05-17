@@ -23,9 +23,9 @@ class NewMeetingModal extends React.Component{
 
 render(){
 		return(
-			<Modal open={true} closeIcon={true} >
+			<Modal open={true} closeIcon={true} closeModal={this.closeModal}>
 			<Header>
-        	enter new info
+        	Edit Info
       		</Header>
       		<Modal.Content >
 			<Form onSubmit={this.handleSubmit}>

@@ -54,11 +54,8 @@ render(){
 		return(
 			<Modal 
 			closeIcon={true} 
-			trigger={<Button className="button">Add new</Button>}
+			trigger={<Button className="button">Create</Button>}
 			>
-			<Header>
-        	enter new info
-      		</Header>
       		<Modal.Content >
 			<Form onSubmit={this.handleSubmit}>
 				<Label>Profile Photo:</Label>	

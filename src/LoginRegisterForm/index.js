@@ -9,6 +9,11 @@ const form = {
 
 
 }
+const fakeLink = {
+	 textDecoration: "underline",
+	 color: "blue"
+
+}
 
 
 class LoginRegisterForm extends React.Component{
@@ -71,7 +76,7 @@ class LoginRegisterForm extends React.Component{
 				value={this.state.email}
 				onChange={this.handleChange}
 				/>
-				<Label>password:</Label>
+				<Label>Password:</Label>
 				<Form.Input
 				type="password"
 				name="password"
@@ -80,14 +85,14 @@ class LoginRegisterForm extends React.Component{
 				onChange={this.handleChange}
 				/>
 				<Button type="submit">
-				{this.state.action === "Login" ? "Log In" : "sign up"}
+				{this.state.action === "Login" ? "Log In" : "Sign Up"}
 				</Button>
 			{
 				this.state.action === "Login"
 				?
-				<p>Need an account? Sign Up <span className="fake-link" onClick={this.switchForm}>Here.</span></p>
+				<p>Need an account? Sign Up <span style={fakeLink} onClick={this.switchForm}>Here.</span></p>
 				:
-				<p>Already have an account? Log In <span className="fake-link" onClick={this.switchForm}>Here.</span></p>
+				<p>Already have an account? Log In <span style={fakeLink} onClick={this.switchForm}>Here.</span></p>
 			}
 			</Form>
 

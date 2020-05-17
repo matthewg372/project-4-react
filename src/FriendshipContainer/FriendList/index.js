@@ -22,8 +22,14 @@ function FriendList(props){
 
 		)
 	})
+	const div = {
+		marginLeft: "10%",
+		marginTop: "2%",
+		marginBottom: "2%",
+		width: "200%"
+	}
 	return(
-		<div>
+		<div style={div}>
 			{friends}
 		</div>
 
