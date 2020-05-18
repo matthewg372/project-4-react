@@ -11,7 +11,7 @@ function Header(props){
 	  }
 	return(
 		<div style={divStyle}>
-			<h1>AH</h1>
+			<h1>AN</h1>
 		<Menu >
 			<Menu.Item name="meeting" onClick={() => props.switchViews("meetings")}>
 			Meetings
